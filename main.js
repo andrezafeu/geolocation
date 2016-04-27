@@ -1,16 +1,22 @@
-if ("geolocation" in navigator) {
-	console.log("Geolocation is available");
-	navigator.geolocation.getCurrentPosition(displayPosition, showPositionError);
-} else {
-	alert("You don't have Geolocation. Time to upgrade your browser.");
-}
+$(document).on("ready", function () {
 
-function displayPosition (data) {
-	console.log("Got position!")
-	console.log(data)
-}
+	if ("geolocation" in navigator) {
+		console.log("Geolocation is available");
+		navigator.geolocation.getCurrentPosition(displayPosition, showPositionError);
+	} else {
+		alert("You don't have Geolocation. Time to upgrade your browser.");
+	}
 
-function showPositionError (error) {
-	console.log("Failed to get position :(")
-	console.log(error)
-}
+});
+
+	function displayPosition (data) {
+		console.log("Got position!")
+		$(".js-set-latitude").text(data.coords.latitude);
+		$(".js-set-longitude").text(data.coords.longitude);
+		console.log(data)
+	}
+
+	function showPositionError (error) {
+		console.log("Failed to get position :(")
+		console.log(error)
+	}
